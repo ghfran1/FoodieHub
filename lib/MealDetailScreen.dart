@@ -43,11 +43,10 @@ class MealDetailScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            // نداء ميثود السعر والكمية
-                            _buildPriceAndQuantityRow(context),
-                            const SizedBox(height: 25),
 
-                            // --- قسم الحجم ---
+
+                            _buildPriceAndQuantityRow(context),
+                            const SizedBox(height: 25),                          
                             _buildSectionHeader("الحجم", "الزامي"),
                             BlocBuilder<CartBloc, CartState>(
                               builder: (context, state) {
@@ -80,13 +79,13 @@ class MealDetailScreen extends StatelessWidget {
                                   children: [
                                     _buildOptionRow(
                                       "سلطة",
-                                      "0.00 د.ك",
+                                      "10.00 د.ك",
                                       state.selectedExtras.contains("سلطة"),
                                       () => context.read<CartBloc>().add(ToggleExtra("سلطة")),
                                     ),
                                     _buildOptionRow(
                                       "حار",
-                                      "0.00 د.ك",
+                                      "10.00 د.ك",
                                       state.selectedExtras.contains("حار"),
                                       () => context.read<CartBloc>().add(ToggleExtra("حار")),
                                     ),
@@ -115,7 +114,8 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  // --- ميثود الصورة ---
+
+  // --- buildTopImageSection
   Widget _buildTopImageSection(BuildContext context) {
     return Stack(
       children: [
@@ -132,6 +132,7 @@ class MealDetailScreen extends StatelessWidget {
             child: Image.asset('images/grill.png', fit: BoxFit.contain, width: 250),
           ),
         ),
+
         SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -151,7 +152,7 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  // --- ميثود السعر والكمية ---
+  // --- buildPriceAndQuantity
   Widget _buildPriceAndQuantityRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,6 +168,7 @@ class MealDetailScreen extends StatelessWidget {
             border: Border.all(color: const Color.fromARGB(255, 247, 248, 249)),
             borderRadius: BorderRadius.circular(10),
           ),
+
           child: BlocBuilder<CartBloc, CartState>(
             builder: (context, state) {
               return Row(
@@ -192,6 +194,7 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
+
   // --- ميثود رأس القسم ---
   Widget _buildSectionHeader(String title, String tag) {
     return Row(
@@ -212,7 +215,7 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  // --- ميثود الصفوف الاختيارية ---
+  // --- buildOptionRow---
   Widget _buildOptionRow(String label, String price, bool isSelected, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
@@ -252,7 +255,7 @@ class MealDetailScreen extends StatelessWidget {
     );
   }
 
-  // --- زر إضافة للسلة ---
+  // --- buildAddToCartButton
   Widget _buildAddToCartButton() {
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
@@ -274,6 +277,8 @@ class MealDetailScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(10)),
+
+
                     child: Text("${state.quantity}",
                         style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
@@ -297,4 +302,4 @@ class MealDetailScreen extends StatelessWidget {
       },
     );
   }
-} // القوس الأخير للكلاس
+} 

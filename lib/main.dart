@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'second_page.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'MealDetailScreen.dart'; 
+import 'MealDetailScreen.dart';
+import 'favorites_screen.dart'; 
+import '../../views/post_screen.dart';
+
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -36,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
 
  final List<Widget> _pages = [
     const FoodAppDetail(), // صفحتك الأصلية
-    const Center(child: Text("المفضلة")),
+    const  FavoritesScreen(),
     const Center(child: Text("السلة")), 
     const Center(child: Text("طلباتي")),
     const Center(child: Text("حسابي")),
@@ -209,6 +213,9 @@ class FoodAppDetail extends StatelessWidget {
 }
 
 
+
+
+
   // 2. شريط البحث
  Widget _buildSearchBar() {
   return Padding(
@@ -243,26 +250,33 @@ class FoodAppDetail extends StatelessWidget {
   );
 }
 
-
 // 3. Categories Section (Horizontal List)
 Widget _buildCategories() {
 
   final categories = [
     {
-      'name': 'وجبات سريعة',  'color': const Color(0xFFF55540),  'img': 'images/fastfood.png'
+      'name': 'وجبات سريعة',  
+      'color': const Color(0xFFF55540),  
+      'img': 'images/fastfood.png'
     },
     {
-      'name': 'مشويات', 'color': const Color(0xFFFCCAC4), 'img': 'images/grill.png'
+      'name': 'مشويات', 
+      'color': const Color(0xFFFCCAC4), 
+      'img': 'images/grill.png'
     },
     {
-      'name': 'ماكولات بحرية',  'color': const Color(0xFF00A991), 'img': 'images/seafood.png'
+      'name': 'ماكولات بحرية',  
+      'color': const Color(0xFF00A991), 
+      'img': 'images/seafood.png'
     },
     {
-      'name': 'لحوم', 'color': const Color(0xFFB0E4DD), 'img': 'images/meat.png'
+      'name': 'لحوم', 
+      'color': const Color(0xFFB0E4DD), 
+      'img': 'images/meat.png'
     },
   ];
 
- return SizedBox(
+  return SizedBox(
     height: 150,
     child: ListView.builder(
       scrollDirection: Axis.horizontal,
@@ -271,57 +285,60 @@ Widget _buildCategories() {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
-
-
           child: GestureDetector(
             onTap: () {
-              if (categories[index]['name'] == 'مشويات') {
+              final name = categories[index]['name'].toString();
+
+              if (name == 'وجبات سريعة') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PostsScreen()),
+                );
+              } else if (name == 'مشويات') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MealDetailScreen()),
                 );
               }
+
+              // لو حبيتي تضيفي navigation لباقي الكروت:
+              // else if (name == 'ماكولات بحرية') { ... }
+              // else if (name == 'لحوم') { ... }
             },
             child: Column(
-            children: [
-
-              // مربع الصورة
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: categories[index]['color'] as Color,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Center(
-                  child: Image.asset(
-                    categories[index]['img'].toString(),
-                    width: 66,
-                    height: 66,
+              children: [
+                // مربع الصورة
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: categories[index]['color'] as Color,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      categories[index]['img'].toString(),
+                      width: 66,
+                      height: 66,
+                    ),
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 8),
-
-              
-              Text(
-                categories[index]['name'].toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                const SizedBox(height: 8),
+                Text(
+                  categories[index]['name'].toString(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-              ),
         );
       },
     ),
   );
 }
-
-
   // 4. Banner 
  Widget _buildPromotionBanner() {
   return Container(
@@ -427,7 +444,6 @@ Widget _foodCardWithInfo(
                   fit: BoxFit.contain),
               ),
 
-            
             ],
           ),
         ),

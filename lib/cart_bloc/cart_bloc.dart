@@ -8,7 +8,7 @@ export 'cart_event.dart';
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartState(quantity: 1)) {
     
-    // 1. زيادة الكمية
+   
     on<IncrementQuantity>((event, emit) {
       emit(CartState(
         quantity: state.quantity + 1,
@@ -17,7 +17,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       ));
     });
 
-    // 2. نقص الكمية
+  
     on<DecrementQuantity>((event, emit) {
       if (state.quantity > 1) {
         emit(CartState(
@@ -28,7 +28,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       }
     });
 
-    // 3. اختيار الحجم (سنجل أو دبل)
+   
     on<SelectSize>((event, emit) {
       emit(CartState(
         quantity: state.quantity,
@@ -37,7 +37,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       ));
     });
 
-    // 4. إضافة أو حذف الإضافات
+  
     on<ToggleExtra>((event, emit) {
       List<String> newList = List.from(state.selectedExtras);
       if (newList.contains(event.extra)) {
