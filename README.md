@@ -25,9 +25,7 @@ The project focuses on improving UI design skills, Flutter fundamentals, and cle
 
 ##  Screenshots
 
-![App Screenshot](PUT_IMAGE_LINK_1)
-
-![App Screenshot](PUT_IMAGE_LINK_2)
+![App Screenshot]([PUT_IMAGE_LINK_1](https://github.com/ghfran1/FoodieHub/blob/main/photo%20food.png)
 
 ---
 
