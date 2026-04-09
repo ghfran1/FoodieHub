@@ -47,9 +47,5 @@ The project focuses on improving UI design skills, Flutter fundamentals, and cle
 
 ##  Contact
 - Name: Ghofran Sabry  
-- GitHub: (حطي اللينك بتاعك هنا)  
-- Email: (لو حابة)
+- GitHub:(https://github.com/ghfran1) 
 
----
-
- If you like this project, feel free to star it!
